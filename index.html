@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>News Website</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#" onclick="reload()" class="Logo">
+                <img src="assets/news-logo.png" alt="Logo">
+            </a>
+            
+        </div>
+        <ul class="topics">
+            <li><a href="#" class="category-link" id="in" onclick="filterAndDisplayNews('india')">In</a></li>
+            <li><a href="#" class="category-link" id="finance" onclick="filterAndDisplayNews('finance')">Finance</a></li>
+            <li><a href="#" class="category-link" id="sports" onclick="filterAndDisplayNews('sports')">Sports</a></li>
+            <li><a href="#" class="category-link" id="politics" onclick="filterAndDisplayNews('politics')">Politics</a></li>
+            <li><a href="#" class="category-link" id="technology" onclick="filterAndDisplayNews('technology')">Technology</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="search-text" placeholder="Search news">
+            <button type="submit" id="search-button">Search</button>
+        </div>
+    </nav>
+
+    <!-- Rest of your website content goes here -->
+    <main class="news-container">
+        <template id="news-card-template">
+            <div class="news-card">
+                <img src="news1.jpg" alt="News Image">
+                <h2 class="news-title" id="news-title">Breaking News</h2>
+                <p class="news-source" id="news-source">Source: News Network</p>
+                <p class="news-date" id="news-date">August 23, 2023</p>
+                <p class="news-summary" id="news-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit...</p>
+            </div>
+        </template>
+        <!-- More news cards... -->
+    </main>
+    <script src="script.js">
+    </script>
+    
+      
+
+</body>
+</html>

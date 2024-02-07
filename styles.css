@@ -1,0 +1,116 @@
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg,  #FFD2D7 , #8062D6);;
+    color: white;
+    padding: 10px 20px;
+    top:0;
+    left:0;
+    right:0;
+    z-index:99;
+}
+
+.logo img {
+    max-height: 60px;
+    border-radius: 5px;
+}
+
+.topics {
+    list-style: none;
+    display: flex;
+}
+
+.topics li {
+    margin-right: 20px;
+}
+
+.topics a {
+    text-decoration: none;
+    color: #322653;
+    transition: color 0.3s ease;
+}
+
+.topics a:hover {
+    color: #ff9900;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #e68a00;
+}
+
+/* Previous CSS code... */
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.news-card {
+    width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.news-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.news-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.news-source,
+.news-date {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.news-summary {
+    font-size: 14px;
+    color: #333;
+}
