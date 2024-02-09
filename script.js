@@ -1,6 +1,9 @@
 // Function to fetch news data from NewsAPI
 
-window.addEventListener("load", () => fetchNews("all"));
+window.addEventListener("load", () => {
+    createNewsCards("all");
+    attachCategoryEventListeners();
+});
 
 function reload() {
     window.location.reload();
@@ -13,12 +16,17 @@ async function fetchNews(category) {
     const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}`;
 
     try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        return data.articles;
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch news. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.articles;
     } catch (error) {
-        console.error('Error fetching news:', error);
-        return [];
+    console.error('Error fetching news:', error);
+    return [];
     }
 }
 
