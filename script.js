@@ -9,11 +9,14 @@ function reload() {
     window.location.reload();
 }
 
-
+//https://newsapi.org/v2/everything?q=keyword&apiKey=5a24983322a249eaaeafcc4638851ee7
 // https://newsapi.org/v2/everything?q=all&apiKey=5a24983322a249eaaeafcc4638851ee7
+//api; pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f
+// https://newsdata.io/api/1/news?apikey=pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f&q=pizza
+//https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}
 async function fetchNews(category) {
-    const apiKey = '5a24983322a249eaaeafcc4638851ee7';
-    const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}`;
+    const apiKey = 'pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f';
+    const apiUrl = 'https://newsdata.io/api/1/news?apikey=${apiKey}&q=${category}';
 
     try {
     const response = await fetch(apiUrl);
