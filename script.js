@@ -35,7 +35,7 @@ function reload() {
 
 //updated code--------------------------------------
 async function fetchNews(category) {
-  const apiKey = '5a24983322a249eaaeafcc4638851ee7'; // Use environment variable for secure storage
+  const apiKey = "5a24983322a249eaaeafcc4638851ee7"; // Use environment variable for secure storage
   const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}`;
 
   try {
