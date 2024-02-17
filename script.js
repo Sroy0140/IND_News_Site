@@ -60,62 +60,125 @@ async function fetchNews(category) {
 const uniqueArticles = new Set();
 
 // Function to create news cards and populate with data
+// async function createNewsCards(category) {
+//     const newsContainer = document.querySelector('.news-container');
+
+//     const newsData = await fetchNews(category);
+
+//     newsData.forEach(article => {
+//         // Check if the article URL is already added
+//         if (!uniqueArticles.has(article.url)) {
+//             const card = document.createElement('div');
+//             card.classList.add('news-card');
+
+//             // Populate card content...
+
+//             const image = document.createElement('img');
+//             image.src = article.urlToImage || 'placeholder.jpg';
+//             image.alt = 'News Image';
+//             card.appendChild(image);
+
+//             const title = document.createElement('h2');
+//             title.classList.add('news-title');
+//             title.textContent = article.title || 'News Title';
+//             card.appendChild(title);
+
+//             const source = document.createElement('p');
+//             source.classList.add('news-source');
+//             source.textContent = `Source: ${article.source.name || 'Unknown Source'}`;
+//             card.appendChild(source);
+
+//             const date = document.createElement('p');
+//             date.classList.add('news-date');
+//             date.textContent = article.publishedAt ? new Date(article.publishedAt).toDateString() : 'Unknown Date';
+//             card.appendChild(date);
+
+//             const summary = document.createElement('p');
+//             summary.classList.add('news-summary');
+//             summary.textContent = article.description || 'News summary not available.';
+//             card.appendChild(summary);
+
+//             const articleLink = document.createElement('a');
+//             articleLink.href = article.url; // Use the article URL from the API response
+//             articleLink.target = '_blank'; // Open in a new window/tab
+
+//             // Add a click event listener to the card
+//             card.addEventListener('click', function () {
+//                 articleLink.click(); // Programmatically trigger the link click
+//             });
+//             card.appendChild(articleLink);
+
+//             newsContainer.appendChild(card);
+
+//             // Add the article URL to the Set to prevent duplicates
+//             uniqueArticles.add(article.url);
+//         }
+//     });
+// }
+
+//-----------------------updated code----------------------------------------
 async function createNewsCards(category) {
-    const newsContainer = document.querySelector('.news-container');
+  const newsContainer = document.querySelector('.news-container');
+  const newsData = await fetchNews(category);
 
-    const newsData = await fetchNews(category);
+  newsData.forEach((article) => {
+    try {
+      // Check if URL is already added (check data structure and property access)
+      if (!uniqueArticles.has(article.url)) {
+        const card = document.createElement('div');
+        card.classList.add('news-card');
 
-    newsData.forEach(article => {
-        // Check if the article URL is already added
-        if (!uniqueArticles.has(article.url)) {
-            const card = document.createElement('div');
-            card.classList.add('news-card');
+        // Populate card content, handling potential errors/missing data
+        const image = document.createElement('img');
+        image.src = article.urlToImage || 'placeholder.jpg';
+        image.alt = 'News Image';
+        card.appendChild(image);
 
-            // Populate card content...
+        const title = document.createElement('h2');
+        title.classList.add('news-title');
+        title.textContent = article.title || 'News Title';
+        card.appendChild(title);
 
-            const image = document.createElement('img');
-            image.src = article.urlToImage || 'placeholder.jpg';
-            image.alt = 'News Image';
-            card.appendChild(image);
+        const source = document.createElement('p');
+        source.classList.add('news-source');
+        source.textContent = `Source: ${article.source.name || 'Unknown Source'}`;
+        card.appendChild(source);
 
-            const title = document.createElement('h2');
-            title.classList.add('news-title');
-            title.textContent = article.title || 'News Title';
-            card.appendChild(title);
+        const date = document.createElement('p');
+        date.classList.add('news-date');
+        date.textContent = article.publishedAt ? new Date(article.publishedAt).toDateString() : 'Unknown Date';
+        card.appendChild(date);
 
-            const source = document.createElement('p');
-            source.classList.add('news-source');
-            source.textContent = `Source: ${article.source.name || 'Unknown Source'}`;
-            card.appendChild(source);
+        const summary = document.createElement('p');
+        summary.classList.add('news-summary');
+        summary.textContent = article.description || 'News summary not available.';
+        card.appendChild(summary);
 
-            const date = document.createElement('p');
-            date.classList.add('news-date');
-            date.textContent = article.publishedAt ? new Date(article.publishedAt).toDateString() : 'Unknown Date';
-            card.appendChild(date);
+        const articleLink = document.createElement('a');
+        articleLink.href = article.url; // Use the article URL from the API response
+        articleLink.target = '_blank'; // Open in a new window/tab
 
-            const summary = document.createElement('p');
-            summary.classList.add('news-summary');
-            summary.textContent = article.description || 'News summary not available.';
-            card.appendChild(summary);
 
-            const articleLink = document.createElement('a');
-            articleLink.href = article.url; // Use the article URL from the API response
-            articleLink.target = '_blank'; // Open in a new window/tab
+        const articleLink = document.createElement('a');
+        articleLink.href = article.url; // Use correct property access
+        articleLink.target = '_blank';
 
-            // Add a click event listener to the card
-            card.addEventListener('click', function () {
-                articleLink.click(); // Programmatically trigger the link click
-            });
-            card.appendChild(articleLink);
+        // Add click event listener
+        card.addEventListener('click', () => articleLink.click());
 
-            newsContainer.appendChild(card);
+        card.appendChild(articleLink);
 
-            // Add the article URL to the Set to prevent duplicates
-            uniqueArticles.add(article.url);
-        }
-    });
+        newsContainer.appendChild(card);
+        uniqueArticles.add(article.url); // Check data structure and property access
+      }
+    } catch (error) {
+      console.error('Error creating card:', error);
+      // Handle errors gracefully (e.g., log, display a message)
+    }
+  });
 }
 
+//----------------------------------------------------------------------------
 
 // Call the function to populate news cards
 createNewsCards("all");
