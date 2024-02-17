@@ -14,24 +14,47 @@ function reload() {
 //api; pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f
 // https://newsdata.io/api/1/news?apikey=pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f&q=pizza
 //https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}
-async function fetchNews(category) {
-    const apiKey = 'pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f';
-    const apiUrl = 'https://newsdata.io/api/1/news?apikey=${apiKey}&q=${category}';
+// async function fetchNews(category) {
+//     const apiKey = 'pub_38332b4a075d7cf4b96cbf44c3c6974da3d9f';
+//     const apiUrl = 'https://newsdata.io/api/1/news?apikey=${apiKey}&q=${category}';
 
-    try {
+//     try {
+//     const response = await fetch(apiUrl);
+
+//     if (!response.ok) {
+//         throw new Error(`Failed to fetch news. Status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     return data.articles;
+//     } catch (error) {
+//     console.error('Error fetching news:', error);
+//     return [];
+//     }
+// }
+
+//updated code--------------------------------------
+async function fetchNews(category) {
+  const apiKey = process.env.NEWS_API_KEY; // Use environment variable for secure storage
+  const apiUrl = `https://newsapi.org/v2/everything?q=${category}&apiKey=${apiKey}`;
+
+  try {
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
-        throw new Error(`Failed to fetch news. Status: ${response.status}`);
+      const errorText = await response.text(); // Try to get more details from the response
+      throw new Error(`Failed to fetch news. Status: ${response.status}, ${errorText}`);
     }
 
     const data = await response.json();
     return data.articles;
-    } catch (error) {
+  } catch (error) {
     console.error('Error fetching news:', error);
-    return [];
-    }
+    return []; // Return an empty array on error
+  }
 }
+
+//---------------------------------------------------
 
 // Create a Set to store unique article URLs
 const uniqueArticles = new Set();
